@@ -1,25 +1,15 @@
-buildscript {
-    ext {
-        springBootVersion = '2.3.0.RELEASE'
-    }
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.9.RELEASE"
-    }
+plugins {
+    id 'java'
+    id 'idea'
+    id 'eclipse'
+    id "org.springframework.boot" version "$springbootVersion"
+    id "io.spring.dependency-management" version "$springDepManVersion"
 }
 
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-
-group = 'com.eeveebank'
+group = 'com.nwboxed'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 11
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenLocal()
@@ -29,16 +19,18 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'commons-beanutils:commons-beanutils:1.9.3'
-    implementation 'org.apache.commons:commons-lang3:3.5'
     implementation 'org.liquibase:liquibase-core'
-    implementation 'org.hibernate:hibernate-java8'
+    implementation "org.hibernate:hibernate-core:$hibernateVersion"
     implementation 'org.glassfish.jaxb:jaxb-runtime'
-    implementation 'org.projectlombok:lombok:1.18.12'
-    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    implementation "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
 
     implementation('com.h2database:h2')
 
-    runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation "io.rest-assured:rest-assured:$restAssuredVersion"
+}
+
+test {
+    useJUnitPlatform()
 }
