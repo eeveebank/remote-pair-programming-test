@@ -7,4 +7,4 @@ push-test:
 	git checkout -b car-api && git pull private car-api --rebase && git push origin car-api
 
 delete-test:
-	git reset --hard && git checkout master && git push -d origin car-api && git branch -D car-api
+	git reset --hard && git checkout master && git branch -D car-api && git push -d origin car-api
